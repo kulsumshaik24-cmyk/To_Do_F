@@ -62,7 +62,17 @@ export default function Tasks() {
   const filteredTasks = tasks.filter((t) => {
     const matchesSearch = t.title.toLowerCase().includes(search.toLowerCase()) || 
                           (t.description && t.description.toLowerCase().includes(search.toLowerCase()));
-    const matchesStatus = statusFilter === 'All Status' || t.status === statusFilter;
+    
+    // Flexible status matching: Group 'To Do' and 'Pending' together so nothing gets hidden
+    let matchesStatus = true;
+    if (statusFilter !== 'All Status') {
+      if (statusFilter === 'Pending') {
+        matchesStatus = t.status === 'Pending' || t.status === 'To Do';
+      } else {
+        matchesStatus = t.status === statusFilter;
+      }
+    }
+
     return matchesSearch && matchesStatus;
   });
 
@@ -94,7 +104,7 @@ export default function Tasks() {
           style={{ background: '#ffffff', border: '1px solid #f2e4dc', padding: '12px 16px', borderRadius: '14px', fontSize: '14px', color: '#2d3748', outline: 'none', cursor: 'pointer' }}
         >
           <option value="All Status">All Status</option>
-          <option value="Pending">Pending</option>
+          <option value="Pending">Pending / To Do</option>
           <option value="In Progress">In Progress</option>
           <option value="Completed">Completed</option>
         </select>
@@ -183,6 +193,7 @@ export default function Tasks() {
                     style={{ width: '100%', background: '#f7fafc', border: '1px solid #e2e8f0', padding: '12px 16px', borderRadius: '14px', fontSize: '14px', color: '#2d3748', outline: 'none', boxSizing: 'border-box' }}
                   >
                     <option value="Pending">Pending</option>
+                    <option value="To Do">To Do</option>
                     <option value="In Progress">In Progress</option>
                     <option value="Completed">Completed</option>
                   </select>
