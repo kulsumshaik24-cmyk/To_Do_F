@@ -7,7 +7,7 @@ import './dashboard.css';
 export default function AddTask() {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  const [status, setStatus] = useState('Pending');
+  const [status, setStatus] = useState('To Do'); // Updated initial state to 'To Do'
   const [priority, setPriority] = useState('Medium');
   const [dueDate, setDueDate] = useState('');
   const navigate = useNavigate();
@@ -76,7 +76,7 @@ export default function AddTask() {
                     onChange={(e) => setStatus(e.target.value)}
                     style={{ width: '100%', padding: '12px 16px', borderRadius: '12px', border: '1px solid #334155', background: '#1e293b', color: '#fff', fontSize: '14px', outline: 'none', fontWeight: '600' }}
                   >
-                    <option value="Pending">To Do</option>
+                    <option value="To Do">To Do</option>
                     <option value="In Progress">In Progress</option>
                     <option value="Completed">Completed</option>
                   </select>
