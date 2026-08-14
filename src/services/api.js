@@ -1,17 +1,16 @@
 import axios from 'axios';
 
 const API = axios.create({
-  baseURL: 'http://localhost:5000/api',
+  baseURL: 'https://to-do-b.onrender.com/api',
 });
 
-API.interceptors.request.use((config) => {
-  const token = localStorage.getItem('token');
+// Attach JWT token to requests if available
+API.interceptors.request.use((req) => {
+  const token = localStorage.getItem('token'); // or wherever you store your JWT token
   if (token) {
-    config.headers.Authorization = `Bearer ${token}`;
+    req.headers.Authorization = `Bearer ${token}`;
   }
-  return config;
-}, (error) => {
-  return Promise.reject(error);
+  return req;
 });
 
 export default API;
