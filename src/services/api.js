@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const API = axios.create({
-  baseURL: 'https://to-do-b.onrender.com/api', // <-- Point directly to your live backend
+  baseURL: 'https://to-do-b.onrender.com/api',
 });
 
 API.interceptors.request.use((req) => {
